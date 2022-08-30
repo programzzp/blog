@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace:DAO层接口的类路径-->
+<mapper namespace="com.program.dao.UserInformationDao">
+
+    <select id="getUserInfo" resultType="UserInfor">
+        select username, password, features, project, avatar from user_information where username='2191142854';
+    </select>
+
+    <select id="get_features" resultType="java.lang.String">
+        select features from user_information where username='2191142854';
+    </select>
+
+    <update id="renew_features_data" parameterType="java.lang.String">
+        update  user_information set features=#{features} where username='2191142854';
+    </update>
+
+    <select id="Login" resultType="UserInfor" parameterType="java.lang.String">
+        select username, password, features, project, avatar from user_information where username=#{username}
+    </select>
+</mapper>

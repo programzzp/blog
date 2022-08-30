@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace:DAO层接口的类路径-->
+<mapper namespace="com.program.dao.BlogDao">
+    <select id="getContent_Data" resultType="ContentData">
+        select * from blog_content;
+    </select>
+
+    <select id="get_Code" resultType="java.lang.String" parameterType="java.lang.String">
+        select article from blog_content where title=#{title}
+    </select>
+
+    <insert id="insert_Blog" parameterType="ContentData">
+        insert into blog_content(id, title, introduce, date, article, classification) values (#{id},#{title},#{introduce},#{data},#{article},#{classification});
+    </insert>
+
+
+    <delete id="deleteCode" parameterType="java.lang.String">
+        delete from blog_content where id=#{id};
+    </delete>
+
+
+    <select id="GetClassification" resultType="ContentData" parameterType="java.lang.String">
+         select * from blog_content where classification=#{classification};
+    </select>
+
+    <select id="GetBlogNumber" resultType="int">
+        select count(*) as paging from blog_content;
+    </select>
+
+
+    <select id="PaginationShowData" resultType="ContentData" parameterType="ShowBlog">
+        select * from blog_content limit #{page},#{size};
+    </select>
+</mapper>
