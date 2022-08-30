@@ -6,13 +6,13 @@
 
 
 
-![1](https://gitee.com/zhou-zhanpei/blog/raw/master/img/1.png)
+![1](https://raw.githubusercontent.com/programzzp/blog/main/img/1.png)
 
-![2](https://gitee.com/zhou-zhanpei/blog/raw/master/img/2.png)
+![2](https://raw.githubusercontent.com/programzzp/blog/main/img/2.png)
 
-![3](https://gitee.com/zhou-zhanpei/blog/raw/master/img/3.png)
+![3](https://raw.githubusercontent.com/programzzp/blog/main/img/3.png)
 
-![4](https://gitee.com/zhou-zhanpei/blog/raw/master/img/4.png)
+![4](https://raw.githubusercontent.com/programzzp/blog/main/img/4.png)
 
 
 
