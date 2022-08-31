@@ -5,6 +5,7 @@ import com.program.dao.BlogDao;
 import com.program.dao.UserInformationDao;
 import com.program.pojo.*;
 import com.program.service.UserService;
+import com.program.util.ImageFile;
 import com.sun.org.apache.bcel.internal.generic.ACONST_NULL;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,11 +49,7 @@ public class BolgSpringTest {
 
     @Test
     public void test2(){
-        ShowBlog showBlog=new ShowBlog(3,4);
-        List<ContentData> contentData = blogDao.PaginationShowData(showBlog);
-        for (ContentData contentDatum : contentData) {
-            System.out.println(contentDatum.getTitle());
-
-        }
+        boolean b = ImageFile.judgeImageFileType("a.jpg");
+        System.out.println(b);
     }
 }

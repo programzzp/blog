@@ -3,6 +3,7 @@
         <el-card>
         
             <el-table
+            height="600"
             :data="content"
             style="width: 100%">
                 <el-table-column
@@ -24,7 +25,7 @@
                 <el-table-column prop="" label="操作"  width="160px">
                       <template class="tool_Button" slot-scope="scope">
                          <el-tooltip class="item" effect="dark" content="查看博客" placement="top">
-                            <el-button type="primary" icon="el-icon-edit" size="mini" @click="showCode(scope.row.title)"></el-button>
+                            <el-button type="primary" icon="el-icon-view" size="mini" @click="showCode(scope.row.title)"></el-button>
                         </el-tooltip>
                         <el-tooltip class="item" effect="dark" content="删除博客" placement="top">
                             <el-button type="primary" icon="el-icon-delete" size="mini" @click="deleteCode(scope.row.id)"></el-button>

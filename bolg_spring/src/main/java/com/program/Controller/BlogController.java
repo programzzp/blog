@@ -4,14 +4,26 @@ package com.program.Controller;
 import com.program.dao.BlogDao;
 import com.program.pojo.*;
 import com.program.service.UserService;
+import com.program.util.FtpUtil;
+import com.program.util.ImageFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin("*")
 public class BlogController {
+
+
+
+    @Autowired
+    private FtpUtil ftpUtil;
 
     @Autowired
     private BlogDao blogDao;
@@ -128,6 +140,41 @@ public class BlogController {
         ShowBlog show=new ShowBlog(page,showBlog.getSize());
         List<ContentData> contentData = blogDao.PaginationShowData(show);
         return new Result(true, StatusCode.OK,"查询成功",contentData);
+    }
+
+
+
+    @RequestMapping(value = "/uploadImage" ,method = RequestMethod.POST)
+    public Result HeadPortrait(@RequestParam("image") MultipartFile image, HttpServletRequest request){
+
+        String imageName = image.getOriginalFilename();
+        //System.out.println(imageName);
+
+
+        if (ImageFile.judgeImageFileType(imageName)){
+            String uploadName=UUID.randomUUID()+imageName;
+           // System.out.println(uploadName);
+
+            InputStream inputStream=null;
+            try {
+                inputStream = image.getInputStream();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            /**
+             * 将图片传递到nginx服务器中
+             */
+            String imgPath = ftpUtil.putImages(inputStream, uploadName);
+           // System.out.println("imagePath="+imgPath);
+
+
+            return new Result(true, StatusCode.OK,"查询成功",imgPath);
+
+        }else {
+            return new Result(false, StatusCode.ERROR,"上传失败","上传错误");
+        }
+
     }
 
 }

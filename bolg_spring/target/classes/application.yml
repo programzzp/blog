@@ -12,3 +12,14 @@ mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/*.xml
   type-aliases-package: com.program.pojo
+ftp:
+  #图片路径
+  imgUrl: http://47.105.34.128/image/
+  #linuxIP地址
+  host: 47.105.34.128
+  #linux账号和密码端口
+  userName: root
+  password: 1519164zzptpp..
+  port: 22
+  #图片发送的地址
+  rootPath: /mydata/nginx/html/image/
