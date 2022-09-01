@@ -3,6 +3,7 @@ package com.program.Controller;
 
 import com.program.dao.BlogDao;
 import com.program.pojo.*;
+import com.program.service.FileUpload;
 import com.program.service.UserService;
 import com.program.util.FtpUtil;
 import com.program.util.ImageFile;
@@ -21,6 +22,9 @@ import java.util.UUID;
 public class BlogController {
 
 
+
+    @Autowired
+    private FileUpload fileUpload;
 
     @Autowired
     private FtpUtil ftpUtil;
@@ -147,31 +151,12 @@ public class BlogController {
     @RequestMapping(value = "/uploadImage" ,method = RequestMethod.POST)
     public Result HeadPortrait(@RequestParam("image") MultipartFile image, HttpServletRequest request){
 
-        String imageName = image.getOriginalFilename();
-        //System.out.println(imageName);
 
+        String path = fileUpload.imageFileUpload(image);
 
-        if (ImageFile.judgeImageFileType(imageName)){
-            String uploadName=UUID.randomUUID()+imageName;
-           // System.out.println(uploadName);
-
-            InputStream inputStream=null;
-            try {
-                inputStream = image.getInputStream();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            /**
-             * 将图片传递到nginx服务器中
-             */
-            String imgPath = ftpUtil.putImages(inputStream, uploadName);
-           // System.out.println("imagePath="+imgPath);
-
-
-            return new Result(true, StatusCode.OK,"查询成功",imgPath);
-
-        }else {
+        if (path!=null){
+            return new Result(true, StatusCode.OK,"查询成功",path);
+        }else{
             return new Result(false, StatusCode.ERROR,"上传失败","上传错误");
         }
 
