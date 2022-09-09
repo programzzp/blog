@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace:DAO层接口的类路径-->
+<mapper namespace="com.program.dao.ProjectDao">
+
+    <insert id="insertProject" parameterType="Project">
+        insert into project(id, name, address) VALUES (#{id},#{name},#{address});
+    </insert>
+
+    <update id="upDataProject" parameterType="Project">
+        update project set name=#{name},address=#{address} where id=#{id};
+    </update>
+
+    <select id="getOneProjectInformation" resultType="Project" parameterType="java.lang.String">
+        select id, name, address from project where id=#{id};
+    </select>
+
+
+    <select id="getAllProjectInformation" resultType="Project">
+        select id, name, address from project;
+    </select>
+
+    <delete id="deleteOneProject" parameterType="java.lang.String">
+        delete from project where id=#{id}
+    </delete>
+
+</mapper>

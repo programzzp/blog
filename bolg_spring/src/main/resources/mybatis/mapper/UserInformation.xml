@@ -20,4 +20,19 @@
     <select id="Login" resultType="UserInfor" parameterType="java.lang.String">
         select username, password, features, project, avatar from user_information where username=#{username}
     </select>
+
+    <select id="GetAvatarPath" resultType="java.lang.String">
+        select avatar from user_information where username='2191142854';
+    </select>
+
+    <update id="setAvatarPath" parameterType="map">
+        update  user_information set avatar=#{avatar} where username=#{username};
+    </update>
+
+    <update id="setFeatures" parameterType="Features">
+        update user_information set features=#{features} where username=#{username};
+    </update>
+
+
+
 </mapper>

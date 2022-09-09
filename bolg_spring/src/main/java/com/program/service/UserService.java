@@ -41,6 +41,7 @@ public class UserService {
     public List<String> get_features(){
         List<String> list=new ArrayList<>();
 
+
         String features = userInformationDao.get_features();
         String[] split = features.split("##");
         for (String s : split) {

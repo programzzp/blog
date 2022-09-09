@@ -23,7 +23,20 @@ export default {
     data(){
         return{
             fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
-            url: 'http://47.105.34.128/images.jpg' 
+            url: '' 
+        }
+    },
+    created(){
+        this.getAvatarPath()
+    },
+    methods:{
+        getAvatarPath(){
+            this.axios({
+                method:'get',
+                url:'/getAvatarPath',
+            }).then((res)=>{
+                this.url=res.data.data
+            });
         }
     }
 }

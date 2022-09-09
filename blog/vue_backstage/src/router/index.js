@@ -5,6 +5,8 @@ import Index from '@/components/Index'
 import ShowBlog from '@/components/ShowBlog'
 import article from '@/components/article'
 import CreationBlog from '@/components/CreationBlog'
+import Settings from '@/components/Settings'
+import Project from '@/components/Project'
 Vue.use(Router)
 
 export default new Router({
@@ -29,6 +31,12 @@ export default new Router({
         },{
           path: '/creation',
           component: CreationBlog
+        },{
+          path: '/settings',
+          component: Settings
+        },{
+          path: '/project',
+          component: Project
         }
       ]
     }

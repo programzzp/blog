@@ -8,8 +8,9 @@
                 class="el-menu-demo" 
                 mode="horizontal" >
                 <el-menu-item index="/show">首页</el-menu-item>
-                 <el-menu-item index="/creation">写博客</el-menu-item>
-                <el-menu-item index="/personalprofile">关于我</el-menu-item>
+                <el-menu-item index="/creation">写博客</el-menu-item>
+                <el-menu-item index="/project">个人项目</el-menu-item>
+                <el-menu-item index="/settings">设置</el-menu-item>
                 </el-menu>
             </el-header>
 

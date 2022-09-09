@@ -4,6 +4,7 @@ package com.program;
 import com.program.dao.BlogDao;
 import com.program.dao.UserInformationDao;
 import com.program.pojo.*;
+import com.program.service.ProjectService;
 import com.program.service.UserService;
 import com.program.util.ImageFile;
 import com.sun.org.apache.bcel.internal.generic.ACONST_NULL;
@@ -30,6 +31,9 @@ public class BolgSpringTest {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ProjectService projectService;
+
     @Test
     public void test(){
         List<String> features = userService.get_features();
@@ -49,7 +53,13 @@ public class BolgSpringTest {
 
     @Test
     public void test2(){
-        boolean b = ImageFile.judgeImageFileType("a.jpg");
+        Project project=new Project("","C语言http服务器","https://github.com/programzzp/C_Http_Server");
+        boolean b = projectService.insertProject(project);
+        System.out.println(b);
+    }
+    @Test
+    public void test3(){
+        boolean b = projectService.deleteOneProject("1567819547507027968");
         System.out.println(b);
     }
 }

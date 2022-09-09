@@ -2,6 +2,7 @@ package com.program.Controller;
 
 
 import com.program.dao.BlogDao;
+import com.program.dao.UserInformationDao;
 import com.program.pojo.*;
 import com.program.service.FileUpload;
 import com.program.service.UserService;
@@ -14,7 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -27,7 +30,7 @@ public class BlogController {
     private FileUpload fileUpload;
 
     @Autowired
-    private FtpUtil ftpUtil;
+    private UserInformationDao userInformationDao;
 
     @Autowired
     private BlogDao blogDao;
@@ -66,6 +69,14 @@ public class BlogController {
     public Result Get_features(){
         List<String> features = userService.get_features();
         return new Result(true, StatusCode.OK,"查询成功",features);
+    }
+
+    @RequestMapping(path = "/setFeatures" ,method = RequestMethod.POST)
+    public Result setFeatures(Features features){
+
+        int i = userInformationDao.setFeatures(features);
+
+        return new Result(true, StatusCode.OK,"查询成功","OK");
     }
 
 
@@ -147,10 +158,14 @@ public class BlogController {
     }
 
 
-
+    /**
+     * 博客内容图片上传
+     * @param image
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/uploadImage" ,method = RequestMethod.POST)
     public Result HeadPortrait(@RequestParam("image") MultipartFile image, HttpServletRequest request){
-
 
         String path = fileUpload.imageFileUpload(image);
 
@@ -160,6 +175,43 @@ public class BlogController {
             return new Result(false, StatusCode.ERROR,"上传失败","上传错误");
         }
 
+    }
+
+
+    /**
+     * 设置头像
+     * @param image
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/setAvatarPath" ,method = RequestMethod.POST)
+    public Result setAvatarPath(@RequestParam("file")MultipartFile image, HttpServletRequest request){
+        String username = request.getHeader("Authorization");
+        String path = fileUpload.imageFileUpload(image);
+
+        Map<String,String> map=new HashMap<>();
+        map.put("username",username);
+        map.put("avatar",path);
+
+        int i = userInformationDao.setAvatarPath(map);
+
+
+        return new Result(true, StatusCode.OK,"上传成功",path);
+    }
+
+
+    /**
+     * 获取头像地址
+     * @return
+     */
+    @RequestMapping(value = "/getAvatarPath",method = RequestMethod.GET)
+    public Result getAvatarPath(){
+        String path = userInformationDao.GetAvatarPath();
+        if (path!=null){
+            return new Result(false, StatusCode.OK,"图片路径存在",path);
+        }else{
+            return new Result(false, StatusCode.ERROR,"图片路径不存在","图片路径不存在");
+        }
     }
 
 }

@@ -13,6 +13,11 @@
                 <p class="project">我的项目</p>
                 <hr />
            </div>
+           <div>
+                <ul v-for="data in project_data" :key="data.id">
+                    <li>{{data.name}} : <a :href="data.address">{{data.address}}</a></li>
+                </ul>
+           </div>
         </el-card>
     </div>
 </template>
@@ -21,21 +26,31 @@
 export default {
     data(){
         return{
-            features: []
+            features: [],
+            project_data: [],
         }
     },
     created(){
         this.getFeatures();
+        this.getProject_data();
     },
     methods:{
-         getFeatures(){
+        getFeatures(){
             this.axios({
                 method:'get',
                 url:'/features',
             }).then((res)=>{
                 this.features=res.data.data;
             });
-        }
+        },getProject_data(){
+            this.axios({
+                method:'get',
+                url:'/getAllProjectInformation',
+            }).then((res)=>{
+                this.project_data=res.data.data
+            });
+        },
+
     }
 }
 </script>

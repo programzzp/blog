@@ -22,6 +22,13 @@ import './assets/css/assets.css'
 
 Vue.config.productionTip = false
 
+
+axios.interceptors.request.use(config => {
+  // 给请求头赋值
+    config.headers.Authorization = window.sessionStorage.getItem('token');
+    return config;
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
