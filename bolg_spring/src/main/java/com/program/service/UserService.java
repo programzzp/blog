@@ -2,18 +2,13 @@ package com.program.service;
 
 import com.program.dao.BlogDao;
 import com.program.dao.UserInformationDao;
-import com.program.pojo.ContentData;
-import com.program.pojo.IdWorker;
-import com.program.pojo.LoginUser;
-import com.program.pojo.UserInfor;
+import com.program.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -57,6 +52,7 @@ public class UserService {
      * @param features
      * @return
      */
+    @Transactional
     public boolean add_features(String features){
         String data="";
 
@@ -124,5 +120,27 @@ public class UserService {
         }else{
             return false;
         }
+    }
+
+
+
+
+
+    public PersonalInformation getPersonalInformationService(String username){
+        return userInformationDao.selectPersonalInformation(username);
+    }
+
+
+    /**
+     * 修改个人信息
+     * @param data
+     * @param username
+     * @return
+     */
+    @Transactional
+    public int revisePersonalInformationService(PersonalInformation data,String username){
+        UpDataPersonalInformation upDataPersonalInformation=new UpDataPersonalInformation(data,username);
+        int fd = userInformationDao.revisePersonalInformation(upDataPersonalInformation);
+        return fd;
     }
 }

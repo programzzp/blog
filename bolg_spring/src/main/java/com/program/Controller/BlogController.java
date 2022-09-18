@@ -214,4 +214,37 @@ public class BlogController {
         }
     }
 
+
+    /**
+     * 获取个人介绍信息
+     * @param username
+     * @return
+     */
+    @RequestMapping(value = "/getPersonalInformationController/{username}",method = RequestMethod.GET)
+    public Result getPersonalInformationController(@PathVariable(value = "username") String username){
+        PersonalInformation personalInformationService = userService.getPersonalInformationService(username);
+        if (personalInformationService!=null){
+            return  new Result(true, StatusCode.OK,"个人信息存在",personalInformationService);
+        }else{
+            return  new Result(false, StatusCode.ERROR,"个人信息不存在",null);
+        }
+    }
+
+
+    /**
+     * 修改个人介绍信息
+     * @param data
+     * @param username
+     * @return
+     */
+    @RequestMapping(value = "/revisePersonalInformation/{username}",method = RequestMethod.POST)
+    public Result revisePersonalInformationController(PersonalInformation data,@PathVariable(value = "username") String username){
+        int fd = userService.revisePersonalInformationService(data, username);
+        if (fd>0){
+            return new Result(true, StatusCode.OK,"修改个人信息成功","OK");
+        }else{
+            return new Result(false, StatusCode.ERROR,"修改个人信息成功","NO");
+        }
+    }
+
 }

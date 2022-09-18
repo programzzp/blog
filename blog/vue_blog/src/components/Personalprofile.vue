@@ -1,6 +1,21 @@
 <template>
     <div>
        <el-card>
+
+
+        <el-descriptions title="个人信息">
+            <el-descriptions-item label="姓名">{{personalInformation.name}}</el-descriptions-item>
+            <el-descriptions-item label="手机号">{{personalInformation.phone}}</el-descriptions-item>
+            <el-descriptions-item label="电子邮件">{{personalInformation.mail}}</el-descriptions-item>
+            <el-descriptions-item label="学历">
+                <el-tag size="small">{{personalInformation.education}}</el-tag>
+            </el-descriptions-item>
+            <el-descriptions-item label="学校">
+                <el-tag size="small">{{personalInformation.school}}</el-tag>
+            </el-descriptions-item>
+            <el-descriptions-item label="家庭住址">{{personalInformation.address}}</el-descriptions-item>
+        </el-descriptions>
+
            <p class="head_data">关于我</p>
 
            <div>
@@ -28,11 +43,13 @@ export default {
         return{
             features: [],
             project_data: [],
+            personalInformation: {}
         }
     },
     created(){
         this.getFeatures();
         this.getProject_data();
+        this.getPersonalInformationWeb();
     },
     methods:{
         getFeatures(){
@@ -48,6 +65,13 @@ export default {
                 url:'/getAllProjectInformation',
             }).then((res)=>{
                 this.project_data=res.data.data
+            });
+        },getPersonalInformationWeb(){
+            this.axios({
+                method:'get',
+                url:'/getPersonalInformationController/2191142854',
+            }).then((res)=>{
+                this.personalInformation=res.data.data
             });
         },
 

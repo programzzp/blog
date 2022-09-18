@@ -1,6 +1,8 @@
 package com.program.pojo;
 
 
+
+
 public class UserInfor {
     private String username;
     private String password;

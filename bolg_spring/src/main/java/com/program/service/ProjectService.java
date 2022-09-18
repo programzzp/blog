@@ -5,6 +5,7 @@ import com.program.pojo.IdWorker;
 import com.program.pojo.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class ProjectService {
      * @param project
      * @return
      */
+    @Transactional
     public boolean insertProject(Project project){
         IdWorker idWorker=new IdWorker();
         project.setId(idWorker.nextId()+"");
@@ -37,6 +39,7 @@ public class ProjectService {
      * @param project
      * @return
      */
+    @Transactional
     public boolean upDataProject(Project project){
         int i = projectDao.upDataProject(project);
         if (i>0){
@@ -72,6 +75,7 @@ public class ProjectService {
      * @param id
      * @return
      */
+    @Transactional
     public boolean deleteOneProject(String id){
         int i = projectDao.deleteOneProject(id);
         if (i>0){

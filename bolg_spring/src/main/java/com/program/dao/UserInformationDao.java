@@ -1,9 +1,7 @@
 package com.program.dao;
 
 
-import com.program.pojo.Features;
-import com.program.pojo.LoginUser;
-import com.program.pojo.UserInfor;
+import com.program.pojo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -31,4 +29,8 @@ public interface UserInformationDao {
 
 
     int setFeatures(Features features);
+
+    PersonalInformation selectPersonalInformation(String username);
+
+    int revisePersonalInformation(UpDataPersonalInformation upDataPersonalInformation);
 }

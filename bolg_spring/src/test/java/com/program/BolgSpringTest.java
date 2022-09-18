@@ -59,7 +59,13 @@ public class BolgSpringTest {
     }
     @Test
     public void test3(){
-        boolean b = projectService.deleteOneProject("1567819547507027968");
-        System.out.println(b);
+        PersonalInformation personalInformation=new PersonalInformation();
+        personalInformation.setAddress("陕西省汉中市宁强县");
+        personalInformation.setEducation("专科");
+        personalInformation.setMail("2191142854@qq.com");
+        personalInformation.setName("周占培");
+        personalInformation.setSchool("陕西工业职业技术学院");
+        personalInformation.setPhone("15191644649");
+        int i = userService.revisePersonalInformationService(personalInformation,"2191142854");
     }
 }

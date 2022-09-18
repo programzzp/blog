@@ -34,5 +34,18 @@
     </update>
 
 
+<!--获取对应用户的个人信息-->
+    <select id="selectPersonalInformation" resultType="PersonalInformation" parameterType="java.lang.String">
+        select school,name,education,mail,phone,address from user_information where username=#{username};
+    </select>
+
+
+    <update id="revisePersonalInformation" parameterType="UpDataPersonalInformation">
+        update user_information set user_information.school=#{personalInformation.school},user_information.name=#{personalInformation.name},user_information.education=#{personalInformation.education},user_information.mail=#{personalInformation.mail},user_information.phone=#{personalInformation.phone},user_information.address=#{personalInformation.address} where username=#{username};
+    </update>
+
+
+
+
 
 </mapper>

@@ -44,6 +44,31 @@ INSERT INTO `blog_content` VALUES ('1558380947367383040','工厂的实现','java
 UNLOCK TABLES;
 
 --
+-- Table structure for table `project`
+--
+
+DROP TABLE IF EXISTS `project`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `project` (
+  `id` varchar(150) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `project`
+--
+
+LOCK TABLES `project` WRITE;
+/*!40000 ALTER TABLE `project` DISABLE KEYS */;
+INSERT INTO `project` VALUES ('1567805927175827456','博客系统','https://github.com/programzzp/blog');
+/*!40000 ALTER TABLE `project` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user_information`
 --
 
@@ -66,7 +91,7 @@ CREATE TABLE `user_information` (
 
 LOCK TABLES `user_information` WRITE;
 /*!40000 ALTER TABLE `user_information` DISABLE KEYS */;
-INSERT INTO `user_information` VALUES ('2191142854','1519164zzp..','软件开发,个人开发者##熟悉编程语言: java,c语言,html,css,js,ARM汇编,sql,shell##熟悉框架: springboot vue springcloud mybatis##熟悉网站分布式，前后端分离开发流程##可以完成私有云平台环境搭建##熟悉数据结构与算法，计算机网络，操作系统等等##喜欢电子,与科技##对stm32,arm-gcc,makefile,openocd,嵌入式有一定了解##计算机网络: http tcp-ip##爱好音乐,吉他##熟悉开发工具 vscode idea##','','http://192.168.0.109/images.jpg');
+INSERT INTO `user_information` VALUES ('2191142854','1519164zzp..','软件开发,个人开发者##熟悉编程语言: java,c语言,html,css,js,ARM汇编,sql,shell##熟悉框架: springboot vue springcloud mybatis##熟悉网站分布式，前后端分离开发流程##可以完成私有云平台环境搭建##熟悉数据结构与算法，计算机网络，操作系统等等##喜欢电子,与科技##对stm32,arm-gcc,makefile,openocd,嵌入式有一定了解##计算机网络: http tcp-ip##熟悉开发工具 vscode idea##熟悉分布式微服务##','','http://47.105.34.128/image/12209993-15df-44e0-8af1-a3cde036189f2.png');
 /*!40000 ALTER TABLE `user_information` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -79,4 +104,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-15  9:31:52
+-- Dump completed on 2022-09-10 15:12:41

@@ -60,6 +60,53 @@
             </el-row>
 
 
+
+
+            <h1>个人信息修改</h1>
+
+            <el-row>
+                <el-col :span="7"><div class="left">
+                    <el-form ref="form" :model="personalInformation" label-width="80px">
+                        <el-form-item label="姓名">
+                            <el-input placeholder="姓名" v-model="personalInformation.name"  ></el-input>
+                        </el-form-item>
+
+                        <el-form-item label="学校">
+                            <el-input placeholder="学校" v-model="personalInformation.school" ></el-input>
+                        </el-form-item>
+
+
+                        <el-form-item label="学历">
+                            <el-radio v-model="personalInformation.education" label="本科">本科</el-radio>
+                            <el-radio v-model="personalInformation.education" label="专科">专科</el-radio>
+                        </el-form-item>
+
+                        <el-form-item label="电话号码">
+                            <el-input placeholder="电话号码" v-model="personalInformation.phone" ></el-input>
+                        </el-form-item>
+
+                        <el-form-item label="家庭住址">
+                            <el-input placeholder="电话号码" v-model="personalInformation.address" ></el-input>
+                        </el-form-item>
+
+
+                        <el-form-item label="电子邮箱">
+                            <el-input placeholder="电子邮箱" v-model="personalInformation.mail" ></el-input>
+                        </el-form-item>
+
+                        <el-form-item>
+                            <el-button type="primary" @click="revisePersonalInformationController">提交个人信息</el-button>
+                        </el-form-item>
+                    </el-form>
+                </div></el-col>
+                <el-col :span="12"><div class="right"></div></el-col>
+            </el-row>
+
+
+
+
+
+
              <!-- 添加个人技能 -->
         <div class="tags"></div>
         <h1>设置技能</h1>
@@ -108,6 +155,16 @@ export default {
             Features: {
                 username: '',
                 features: ''
+            },
+
+            //个人信息
+            personalInformation: {
+                school: '',     //学校
+                name: '',       //姓名
+                education: '本科',   //学历
+                mail: '',       //电子邮件地址
+                phone: '',     //手机号
+                address: ''   //家庭住址
             }
             
         }
@@ -115,6 +172,7 @@ export default {
     created(){
         this.getAvatarPath()
         this.getFeatures()
+        this.getPersonalInformationWeb()
     },
     methods: {
         handleRemove(file, fileList) {
@@ -186,6 +244,29 @@ export default {
                     this.$message({message:'添加成功',type:'success'})
                 }else{
                     this.$message.error('添加失败');
+                }
+            });
+        },
+
+        getPersonalInformationWeb(){
+            this.axios({
+                method:'get',
+                url:'/getPersonalInformationController/'+window.sessionStorage.getItem('username'),
+            }).then((res)=>{
+                this.personalInformation=res.data.data
+            });
+        },
+
+        revisePersonalInformationController(){
+            this.axios({
+                method:'post',
+                url:'/revisePersonalInformation/2191142854',
+                data: Qs.stringify(this.personalInformation)
+            }).then((res)=>{
+                if(res.data.success){
+                    this.$message({message:res.data.message,type:'success'})
+                }else{
+                    this.$message.error(res.data.message);
                 }
             });
         }
