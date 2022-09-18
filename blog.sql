@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.30, for Win64 (x86_64)
 --
--- Host: 192.168.0.109    Database: blog
+-- Host: localhost    Database: blog
 -- ------------------------------------------------------
--- Server version	5.7.39
+-- Server version	5.7.30-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -64,7 +64,7 @@ CREATE TABLE `project` (
 
 LOCK TABLES `project` WRITE;
 /*!40000 ALTER TABLE `project` DISABLE KEYS */;
-INSERT INTO `project` VALUES ('1567805927175827456','博客系统','https://github.com/programzzp/blog');
+INSERT INTO `project` VALUES ('1567805927175827456','个人博客系统','https://github.com/programzzp/blog');
 /*!40000 ALTER TABLE `project` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,6 +81,12 @@ CREATE TABLE `user_information` (
   `features` varchar(2000) DEFAULT NULL,
   `project` varchar(100) DEFAULT NULL,
   `avatar` varchar(100) DEFAULT NULL,
+  `school` varchar(100) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `education` varchar(100) DEFAULT NULL,
+  `mail` varchar(100) DEFAULT NULL,
+  `phone` varchar(100) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -91,7 +97,7 @@ CREATE TABLE `user_information` (
 
 LOCK TABLES `user_information` WRITE;
 /*!40000 ALTER TABLE `user_information` DISABLE KEYS */;
-INSERT INTO `user_information` VALUES ('2191142854','1519164zzp..','软件开发,个人开发者##熟悉编程语言: java,c语言,html,css,js,ARM汇编,sql,shell##熟悉框架: springboot vue springcloud mybatis##熟悉网站分布式，前后端分离开发流程##可以完成私有云平台环境搭建##熟悉数据结构与算法，计算机网络，操作系统等等##喜欢电子,与科技##对stm32,arm-gcc,makefile,openocd,嵌入式有一定了解##计算机网络: http tcp-ip##熟悉开发工具 vscode idea##熟悉分布式微服务##','','http://47.105.34.128/image/12209993-15df-44e0-8af1-a3cde036189f2.png');
+INSERT INTO `user_information` VALUES ('2191142854','1519164zzp..','熟练运用java语言以及相关技术进行应用开发##熟练使用Idea、git、Maven项目管理和项目构建工具##熟练使用SpringBoot、Spring、SpringMVC、Mybatis、SpringCloud开发框架##熟练使用MySql、MongDB、Redis等数据库技术##熟练使用html，css，js，vue进行前端开发##熟练使用linux与docker对项目进行部署##熟悉微服务，服务网格，分布式锁，分布式存储，负载均衡##了解Java做物联网开发##','','http://47.105.34.128/image/12209993-15df-44e0-8af1-a3cde036189f2.png','陕西工业职业技术学院','周占培','专科','2191142854@qq.com','15191644649','陕西省汉中市宁强县');
 /*!40000 ALTER TABLE `user_information` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -104,4 +110,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-10 15:12:41
+-- Dump completed on 2022-09-18 18:02:14
