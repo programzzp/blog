@@ -5,7 +5,7 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://127.0.0.1:3306/blog?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://39.101.1.197:3306/blog?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
 mybatis:
@@ -14,9 +14,9 @@ mybatis:
   type-aliases-package: com.program.pojo
 ftp:
   #图片路径
-  imgUrl: http://47.105.34.128/image/
+  imgUrl: http://39.101.1.197/image/
   #linuxIP地址
-  host: 47.105.34.128
+  host: 39.101.1.197
   #linux账号和密码端口
   userName: root
   password: 1519164zzptpp..

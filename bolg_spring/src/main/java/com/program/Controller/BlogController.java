@@ -246,5 +246,4 @@ public class BlogController {
             return new Result(false, StatusCode.ERROR,"修改个人信息成功","NO");
         }
     }
-
 }

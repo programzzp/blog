@@ -20,7 +20,7 @@
             width="30%">
                 <span>
                     <el-upload
-                        action="http://127.0.0.1/setAvatarPath"
+                        action="http://39.101.1.197:8081/setAvatarPath"
                         list-type="picture-card"
                         :headers="headerObj"
                         :on-preview="handlePictureCardPreview"

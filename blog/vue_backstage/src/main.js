@@ -17,7 +17,7 @@ Vue.use(mavonEditor)
 Vue.use(element)
 Vue.use(VueAxios,axios)
 
-axios.defaults.baseURL='http://127.0.0.1'
+axios.defaults.baseURL='http://39.101.1.197:8081'
 import './assets/css/assets.css'
 
 Vue.config.productionTip = false

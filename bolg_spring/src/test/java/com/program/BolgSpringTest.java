@@ -4,6 +4,7 @@ package com.program;
 import com.program.dao.BlogDao;
 import com.program.dao.UserInformationDao;
 import com.program.pojo.*;
+import com.program.service.FileUpload;
 import com.program.service.ProjectService;
 import com.program.service.UserService;
 import com.program.util.ImageFile;
@@ -21,6 +22,9 @@ import java.util.List;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class BolgSpringTest {
+
+    @Autowired
+    private FileUpload fileUpload;
 
     @Autowired
     private BlogDao blogDao;
@@ -57,15 +61,5 @@ public class BolgSpringTest {
         boolean b = projectService.insertProject(project);
         System.out.println(b);
     }
-    @Test
-    public void test3(){
-        PersonalInformation personalInformation=new PersonalInformation();
-        personalInformation.setAddress("陕西省汉中市宁强县");
-        personalInformation.setEducation("专科");
-        personalInformation.setMail("2191142854@qq.com");
-        personalInformation.setName("周占培");
-        personalInformation.setSchool("陕西工业职业技术学院");
-        personalInformation.setPhone("15191644649");
-        int i = userService.revisePersonalInformationService(personalInformation,"2191142854");
-    }
+
 }

@@ -1,4 +1,6 @@
-# 博客网站
+# CloudNotes
+
+![](https://gitee.com/zhou-zhanpei/blog/raw/master/img/logo.ico)
 
 ## 🚀项目表述
 
@@ -7,9 +9,9 @@
 ## 🍳技术栈
 
 - 语言：java
-- 后端框架：springboot
-- 数据库：mysql
-- 前端框架： vue
+- 后端框架：springboot  mybatis
+- 数据库：mysql 
+- 前端框架： vue element-ui
 - 代码高亮：highlight
 
 
@@ -18,19 +20,21 @@
 
 
 
-![1](https://raw.githubusercontent.com/programzzp/blog/main/img/1.png)
+![](https://gitee.com/zhou-zhanpei/blog/raw/master/img/1.PNG)
 
-![2](https://raw.githubusercontent.com/programzzp/blog/main/img/2.png)
-
-![3](https://raw.githubusercontent.com/programzzp/blog/main/img/3.png)
-
-![4](https://raw.githubusercontent.com/programzzp/blog/main/img/4.png)
-
-![4](https://raw.githubusercontent.com/programzzp/blog/main/img/5.PNG)
+![](https://gitee.com/zhou-zhanpei/blog/raw/master/img/2.PNG)
 
 
 
-项目地址：2022-9-15（到期） http://47.105.34.128   不支持手机访问
+
+
+![](https://gitee.com/zhou-zhanpei/blog/raw/master/img/3.PNG)
+
+![](https://gitee.com/zhou-zhanpei/blog/raw/master/img/4.PNG)
+
+![](https://gitee.com/zhou-zhanpei/blog/raw/master/img/5.PNG)
+
+![](https://gitee.com/zhou-zhanpei/blog/raw/master/img/6.PNG)
 
 
 
@@ -41,6 +45,10 @@
 ### 1,docker搭建数据库
 
 ```bash
+#创建mysql文件夹与子文件夹
+mkdir -p /mydata/mysql
+mkdir -p /mydata/mysql/conf
+mkdir -p /mydata/mysql/data
 #安装mysql
 #在mydata目录下新建conf与data 
 docker run -d -p 3306:3306 -v /mydata/mysql/conf:/etc/mysql/conf.d -v /mydata/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root --name mysql mysql:5.7
@@ -49,6 +57,8 @@ docker run -d -p 3306:3306 -v /mydata/mysql/conf:/etc/mysql/conf.d -v /mydata/my
 ### 2,将blog.sql导入MYSQL数据库中
 
 ```bash
+#本机远程登陆数据库
+mysql -h ip -uroot -p 
 #新建数据库(MYSQL) create database blog CHARACTER SET utf8 COLLATE utf8_general_ci;
 create database blog CHARACTER SET utf8 COLLATE utf8_general_ci;
 #导入数据
@@ -58,6 +68,60 @@ mysql -h ip -uroot –p blog < blog.sql
 
 
 ## 后端部署
+
+**提前下载java与maven环境**
+
+
+
+### 源码yaml配置修改
+
+```yaml
+#路径 blog/blob/main/bolg_spring/src/main/resources/application.yml
+
+server:
+  port: 80
+  max-http-header-size: 1024KB
+spring:
+  datasource:
+    username: root
+    password: root
+    #数据库url需要修改为你的mysql数据库地址
+    url: jdbc:mysql://ip:3306/blog?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.program.pojo
+#图片上传的地址设置需要修改地址
+ftp:
+  #图片路径
+  imgUrl: http://ip/image/
+  #linuxIP地址
+  host: ip
+  #linux账号和密码端口
+  userName: root
+  password: password
+  port: 22
+  #图片发送的地址
+  rootPath: /mydata/nginx/html/image/
+```
+
+
+
+### 打包上传到服务器
+
+```bash
+#打包blog/bolg_spring
+mvn package
+#打包后的jar文件地址
+[INFO] Building jar: C:\Users\redmi\Desktop\blog\blog\bolg_spring\target\bolg_spring-1.0-SNAPSHOT.jar
+
+#上传到服务器
+scp bolg_spring-1.0-SNAPSHOT.jar root@ip:/地址/
+```
+
+
 
 ### makefile编写
 
@@ -86,17 +150,17 @@ EXPOSE 80
 
 
 
-### 修改数据库配置
+### 部署后端
 
 ```bash
-#bolg_spring/src/main/resources/application.yml 
+#下载java:8镜像
+docker pull registry.cn-wulanchabu.aliyuncs.com/2191142854/java:8
 
-#url: jdbc:mysql://url:port/blog?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
-#url 为你自己数据库地址   port:端口号 
-
-#打包java项目
+#制作镜像
 
 docker build -f Dockerfile -t blog:1.0 .
+
+#部署
 
 docker run -d -p 8081:80 --name blog blog:1.0
 ```
@@ -107,30 +171,9 @@ docker run -d -p 8081:80 --name blog blog:1.0
 
 ## 前端部署
 
-```bash
-  
-#前端修改后端
-#blog/vue_blog/src/main.js 
-#blog/vue_backstage/src/main.js
-#axios.defaults.baseURL='http://url:port' 后端地址(需要修改地址)
-
-#分别进入vue_blog与vue_backstage
-cd vue_blog
-cd vue_backstage
-#下载依赖
-npm install
-#运行
-npm run dev
-
-#打包
-npm run build
-
-#部署nginx
-#将static与index.html放如nginx\html文件夹下
-
-```
 
 
+### 部署后台与前台的nginx环境
 
 ```bash
 #下载镜像
@@ -157,7 +200,47 @@ mv conf nginx/
 docker run -p 80:80 --name nginx -v /mydata/nginx/html:/usr/share/nginx/html -v /mydata/nginx/logs:/var/log/nginx -v /mydata/nginx/conf:/etc/nginx -d nginx:1.10	
 #设置开机启动
 docker update nginx --restart=always
+```
 
+
+
+### 创建后端图片上传后的地址
+
+```bash
+#创建后端图片上传后的地址
+
+mkdir -p /mydata/nginx/html/image
+```
+
+
+
+
+
+```bash
+  
+#前端修改后端
+#blog/vue_blog/src/main.js 
+#blog/vue_backstage/src/main.js
+#axios.defaults.baseURL='http://url:port' 后端地址(需要修改地址)
+
+#分别进入vue_blog与vue_backstage
+cd vue_blog
+cd vue_backstage
+#下载依赖
+npm install
+#运行
+npm run dev
+
+#打包
+npm run build
+
+#部署nginx
+#将static与index.html放如nginx\html文件夹下
+
+scp -r static root@ip:/mydata/nginx/html/
+scp index.html root@ip:/mydata/nginx/html/
 
 ```
+
+
 
